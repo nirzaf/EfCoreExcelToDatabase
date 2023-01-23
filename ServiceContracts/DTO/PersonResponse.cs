@@ -1,5 +1,4 @@
-﻿using System;
-using Entities;
+﻿using Entities;
 using ServiceContracts.Enums;
 
 namespace ServiceContracts.DTO;
@@ -47,7 +46,7 @@ public class PersonResponse
 
   public PersonUpdateRequest ToPersonUpdateRequest()
   {
-    return new PersonUpdateRequest() { PersonID = PersonID, PersonName = PersonName, Email = Email, DateOfBirth = DateOfBirth, Gender = (GenderOptions)Enum.Parse(typeof(GenderOptions), Gender, true), Address = Address, CountryID = CountryID, ReceiveNewsLetters = ReceiveNewsLetters };
+    return new PersonUpdateRequest { PersonID = PersonID, PersonName = PersonName, Email = Email, DateOfBirth = DateOfBirth, Gender = (GenderOptions)Enum.Parse(typeof(GenderOptions), Gender, true), Address = Address, CountryID = CountryID, ReceiveNewsLetters = ReceiveNewsLetters };
   }
 }
 
@@ -62,7 +61,8 @@ public static class PersonExtensions
   public static PersonResponse ToPersonResponse(this Person person)
   {
     //person => convert => PersonResponse
-    return new PersonResponse() { PersonID = person.PersonID, PersonName = person.PersonName, Email = person.Email, DateOfBirth = person.DateOfBirth, ReceiveNewsLetters = person.ReceiveNewsLetters, Address = person.Address, CountryID = person.CountryID, Gender = person.Gender, 
+    return new PersonResponse
+    { PersonID = person.PersonID, PersonName = person.PersonName, Email = person.Email, DateOfBirth = person.DateOfBirth, ReceiveNewsLetters = person.ReceiveNewsLetters, Address = person.Address, CountryID = person.CountryID, Gender = person.Gender, 
       Age = (person.DateOfBirth != null) ? Math.Round((DateTime.Now - person.DateOfBirth.Value).TotalDays / 365.25) : null, Country = person.Country?.CountryName };
   }
 }

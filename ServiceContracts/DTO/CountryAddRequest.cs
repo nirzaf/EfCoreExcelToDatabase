@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using Entities;
+﻿using Entities;
 
 namespace ServiceContracts.DTO;
 
@@ -13,6 +11,6 @@ public class CountryAddRequest
 
   public Country ToCountry()
   {
-    return new Country() { CountryName = CountryName };
+    return new Country { CountryName = CountryName };
   }
 }

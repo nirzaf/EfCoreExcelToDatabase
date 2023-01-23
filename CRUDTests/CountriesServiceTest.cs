@@ -108,8 +108,8 @@ public class CountriesServiceTest
   {
     //Arrange
     List<CountryAddRequest> country_request_list = new() { 
-      new CountryAddRequest() { CountryName = "USA" },
-      new CountryAddRequest() { CountryName = "UK" }
+      new CountryAddRequest { CountryName = "USA" },
+      new CountryAddRequest { CountryName = "UK" }
     };
 
     //Act

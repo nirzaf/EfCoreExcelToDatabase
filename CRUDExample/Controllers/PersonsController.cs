@@ -4,7 +4,6 @@ using Rotativa.AspNetCore;
 using ServiceContracts;
 using ServiceContracts.DTO;
 using ServiceContracts.Enums;
-using System.IO;
 
 namespace CRUDExample.Controllers;
 
@@ -28,7 +27,7 @@ public class PersonsController : Controller
  public async Task<IActionResult> Index(string searchBy, string? searchString, string sortBy = nameof(PersonResponse.PersonName), SortOrderOptions sortOrder = SortOrderOptions.ASC)
  {
   //Search
-  ViewBag.SearchFields = new Dictionary<string, string>()
+  ViewBag.SearchFields = new Dictionary<string, string>
   {
    { nameof(PersonResponse.PersonName), "Person Name" },
    { nameof(PersonResponse.Email), "Email" },
@@ -60,7 +59,7 @@ public class PersonsController : Controller
  {
   List<CountryResponse> countries = await _countriesService.GetAllCountries();
   ViewBag.Countries = countries.Select(temp =>
-   new SelectListItem() { Text = temp.CountryName, Value = temp.CountryID.ToString() }
+   new SelectListItem { Text = temp.CountryName, Value = temp.CountryID.ToString() }
   );
 
   //new SelectListItem() { Text="Harsha", Value="1" }
@@ -77,7 +76,7 @@ public class PersonsController : Controller
   {
    List<CountryResponse> countries = await _countriesService.GetAllCountries();
    ViewBag.Countries = countries.Select(temp =>
-    new SelectListItem() { Text = temp.CountryName, Value = temp.CountryID.ToString() });
+    new SelectListItem { Text = temp.CountryName, Value = temp.CountryID.ToString() });
 
    ViewBag.Errors = ModelState.Values.SelectMany(v => v.Errors).Select(e => e.ErrorMessage).ToList();
    return View();
@@ -104,7 +103,7 @@ public class PersonsController : Controller
 
   List<CountryResponse> countries = await _countriesService.GetAllCountries();
   ViewBag.Countries = countries.Select(temp =>
-   new SelectListItem() { Text = temp.CountryName, Value = temp.CountryID.ToString() });
+   new SelectListItem { Text = temp.CountryName, Value = temp.CountryID.ToString() });
 
   return View(personUpdateRequest);
  }
@@ -126,15 +125,13 @@ public class PersonsController : Controller
    PersonResponse updatedPerson = await _personsService.UpdatePerson(personUpdateRequest);
    return RedirectToAction("Index");
   }
-  else
-  {
-   List<CountryResponse> countries = await _countriesService.GetAllCountries();
-   ViewBag.Countries = countries.Select(temp =>
-    new SelectListItem() { Text = temp.CountryName, Value = temp.CountryID.ToString() });
 
-   ViewBag.Errors = ModelState.Values.SelectMany(v => v.Errors).Select(e => e.ErrorMessage).ToList();
-   return View(personResponse.ToPersonUpdateRequest());
-  }
+  List<CountryResponse> countries = await _countriesService.GetAllCountries();
+  ViewBag.Countries = countries.Select(temp =>
+   new SelectListItem { Text = temp.CountryName, Value = temp.CountryID.ToString() });
+
+  ViewBag.Errors = ModelState.Values.SelectMany(v => v.Errors).Select(e => e.ErrorMessage).ToList();
+  return View(personResponse.ToPersonUpdateRequest());
  }
 
 
@@ -171,7 +168,7 @@ public class PersonsController : Controller
   //Return view as pdf
   return new ViewAsPdf("PersonsPDF", persons, ViewData)
   {
-   PageMargins = new Rotativa.AspNetCore.Options.Margins() { Top = 20, Right = 20, Bottom = 20, Left = 20 },
+   PageMargins = new Rotativa.AspNetCore.Options.Margins { Top = 10, Right = 10, Bottom = 10, Left = 10 },
    PageOrientation = Rotativa.AspNetCore.Options.Orientation.Landscape
   };
  }
