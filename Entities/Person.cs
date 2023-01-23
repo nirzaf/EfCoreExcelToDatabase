@@ -32,10 +32,6 @@ public class Person
   //bit
   public bool ReceiveNewsLetters { get; set; }
 
-  //[Column("TaxIdentificationNumber", TypeName = "varchar(8)")]
-  public string? TIN { get; set; }
-
-
   [ForeignKey("CountryID")]
   public virtual Country? Country { get; set; }
 }
